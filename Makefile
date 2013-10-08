@@ -9,10 +9,10 @@ CFLAGS  	:= -c -pthread $(OPTS)
 LDFLAGS 	:= $(OPTS) -shared
 
 SRCS		:= $(wildcard *.cxx)
-TESTS		:= $(wildcard tests/*.cc)
+TESTS		:= $(wildcard tests/test_*.cc)
 
 
-.PHONY:	all clean cleanall tests
+.PHONY:	all clean cleanall tests run
 
 all:	libsfcore.so
 
@@ -26,3 +26,6 @@ tests:	$(patsubst %.cc,%,$(TESTS))
 
 $(patsubst %.cc,%,$(TESTS)):%:	%.cc libsfcore.so
 	$(CXX) -pthread $(OPTS) -I. -L. -lsfcore -o $@ $<
+
+run:	$(patsubst %.cc,%,$(TESTS))
+	@for t in $^; do echo -e "\e[1mTest\e[0m: $$t"; LD_LIBRARY_PATH=. $$t; done
