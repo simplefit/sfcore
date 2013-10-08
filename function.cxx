@@ -12,9 +12,8 @@ function::operator double () const
 void function::set_param(unsigned idx, double val)
 {
   if (idx >= _num)
-    throw std::out_of_range("Index out of range, > than \n"
-			    // + std::to_string(_num)
-			    );
+    throw std::out_of_range("Index out of range, " + std::to_string(idx)
+			    + " >= " + std::to_string(_num) + "\n");
   _args[idx] = val;
 }
 
