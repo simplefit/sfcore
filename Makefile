@@ -12,7 +12,7 @@ SRCS		:= $(wildcard *.cxx)
 TESTS		:= $(wildcard tests/test_*.cc)
 
 
-.PHONY:	all clean cleanall tests run
+.PHONY:	all clean tests run
 
 all:	libsfcore.so
 
@@ -21,6 +21,10 @@ libsfcore.so:	$(patsubst %.cxx,%.o,$(SRCS))
 
 $(patsubst %.cxx,%.o,$(SRCS)):%.o:	%.cxx
 	$(CXX) $(CFLAGS) -o $@ $<
+
+clean:
+	rm -f *.o *.so
+	rm -f $(patsubst %.cc,%,$(TESTS))
 
 tests:	$(patsubst %.cc,%,$(TESTS))
 
