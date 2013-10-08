@@ -2,8 +2,6 @@
 #define __simplefit_function__
 
 #include <utility>
-#include <stdexcept>
-#include <string>
 
 
 class function {
