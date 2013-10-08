@@ -4,7 +4,7 @@ PKGCONFIG	:= $(shell which pkg-config)
 CC           	:= $(shell which gcc)
 CXX 		:= $(shell which g++)
 
-OPTS    	:= -g -Wall -fPIC -m64
+OPTS    	:= -g -Wall -fPIC -m64 -std=c++11
 CFLAGS  	:= -c -pthread $(OPTS)
 LDFLAGS 	:= $(OPTS) -shared
 
