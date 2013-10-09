@@ -9,7 +9,7 @@ function::operator double () const
   return _fptr(_num, _args);
 }
 
-void function::set_param(unsigned idx, double val)
+void function::set_param(const unsigned idx, const double val)
 {
   if (idx >= _num)
     throw std::out_of_range("Index out of range, " + std::to_string(idx)

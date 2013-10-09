@@ -12,7 +12,8 @@ public:
 
   operator double () const;
 
-  void set_param(unsigned idx, double val);
+  void set_param(const unsigned idx, const double val);
+
   std::pair<int, double *> params() const;
 
 private:
