@@ -1,23 +1,23 @@
-#include <stdexcept>
-#include <string>
+// #include <stdexcept>
+// #include <string>
 
 #include "function.hxx"
 
 
 function::operator double () const
 {
-  return _fptr(_num, _args);
+  return _fptr(_args);
 }
 
-void function::set_param(const unsigned idx, const double val)
+void function::replace(const unsigned idx, const fnbase_ptr arg)
 {
-  if (idx >= _num)
-    throw std::out_of_range("Index out of range, " + std::to_string(idx)
-			    + " >= " + std::to_string(_num) + "\n");
-  _args[idx] = val;
+  // if (idx >= _args.size())
+  //   throw std::out_of_range("Index out of range, " + std::to_string(idx)
+  // 			    + " >= " + std::to_string(_args.size()) + "\n");
+  _args.at(idx) = arg;
 }
 
-std::pair<int, double *> function::params() const
+auto function::components() -> fnbase_vec &
 {
-  return std::pair<int, double *> (_num, _args);
+  return _args;
 }

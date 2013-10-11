@@ -1,25 +1,34 @@
 #ifndef __simplefit_function__
 #define __simplefit_function__
 
-#include <utility>
+#include <vector>
+#include <memory>
+
+#include "function_base.hxx"
 
 
-class function {
+class function : public function_base {
 public:
-  function(unsigned num, double * args, double (* fptr) (unsigned, double *))
-    : _num(num), _args(args), _fptr(fptr) {}
+  typedef std::vector<fnbase_ptr> fnbase_vec;
+  typedef double (* fptr_t) (const fnbase_vec &);
+
+  function(fptr_t fptr, fnbase_vec args)
+    : _fptr(fptr), _args(args) {}
+
+  function(fptr_t fptr, unsigned num, fnbase_ptr * args)
+    : _fptr(fptr), _args(args, args + num) {}
+
   ~function() {};
 
-  operator double () const;
+  virtual operator double () const;
 
-  void set_param(const unsigned idx, const double val);
+  virtual void replace(const unsigned idx, const fnbase_ptr arg);
 
-  std::pair<int, double *> params() const;
+  fnbase_vec& components();
 
 private:
-  unsigned _num;
-  double * _args;
-  double (* _fptr) (unsigned, double *);
+  fptr_t _fptr;
+  fnbase_vec _args;
 };
 
 #endif	// __simplefit_function__
