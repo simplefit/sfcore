@@ -18,6 +18,9 @@ public:
   function(fptr_t fptr, unsigned num, fnbase_ptr * args)
     : _fptr(fptr), _args(args, args + num) {}
 
+  function(const function & other)
+    : _fptr(other._fptr), _args(other._args) {}
+
   ~function() {};
 
   virtual operator double () const;
