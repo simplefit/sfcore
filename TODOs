@@ -1,0 +1,44 @@
+# -*- mode: org; -*-
+
+* TODO Functions & variables
+A function can be parametrised by variables as well as functions.
+Easiest way to achieve type agnostic expression is by inheriting
+from the same base class.
+
+- Function base class implementation options: purely virtual, only
+  determines interface (methods).  Use
+  - polymorphism (abstract base class), or
+  - templated base classes?
+- Function class: the most generic function.  Data members:
+  - function pointer
+  - vector of base class pointers as arguments to function
+- Variables (parameters/observables) are linear functions.  Possible
+  underlying datastructures:
+  - inherit directly from base class: a double, or vector of 1 double
+  - inherit from function: linear function with a double (overkill?)
+- Constants:
+  - variables with 0 range (min = max = val)
+  - variables bound to values (=boost::bind=)
+- Function pointer implementation:
+  - Fixed signature: (number of args, arg array), (vector of args),
+  - Different signatures, (arg1, arg2, ...) but overloaded with
+    =boost::make_overloaded_function()= to a standard interface
+  - Forward calls to different signatures (Boost.Functional.Forward)
+
+* TODO Testing
+Boost.Test
+
+* TODO Caching
+- Hash the component-tree
+  - Should be possible to update only modified branches of the tree
+  - Look at git tree objects for ideas
+- Caveat: hash function should be faster than evaluation
+
+* TODO Fitter
+Use generic TFitter to build an interface to Minuit
+
+* TODO Logging
+Boost.Log
+
+* TODO Bindings
+Boost.Python
