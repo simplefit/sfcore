@@ -1,5 +1,5 @@
-// #include <stdexcept>
-// #include <string>
+#include <stdexcept>
+#include <string>
 
 #include "function.hxx"
 
@@ -11,9 +11,10 @@ function::operator double () const
 
 void function::replace(const unsigned idx, const fnbase_ptr arg)
 {
-  // if (idx >= _args.size())
-  //   throw std::out_of_range("Index out of range, " + std::to_string(idx)
-  // 			    + " >= " + std::to_string(_args.size()) + "\n");
+  if (idx >= _args.size())
+    throw std::out_of_range("Index out of range: "
+			    + std::to_string(_args.size()) + "(size) <= "
+			    + std::to_string(idx) + "(index)");
   _args.at(idx) = arg;
 }
 
