@@ -25,9 +25,6 @@ public:
 
   inline virtual operator double () const { return _val; }
 
-  inline virtual void replace(const unsigned /*idx*/,
-			      const fnbase_ptr /*arg*/) {}
-
   inline bool check_bounds() const { return check_bounds(_val); }
 
   void set_val(const double val);

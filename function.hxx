@@ -22,7 +22,7 @@ public:
 
   virtual operator double () const;
 
-  virtual void replace(const unsigned idx, const fnbase_ptr arg);
+  void replace(const unsigned idx, const fnbase_ptr arg);
 
   fnbase_vec& components();
 
