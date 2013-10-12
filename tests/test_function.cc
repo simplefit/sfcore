@@ -2,13 +2,14 @@
 #include <stdexcept>
 
 #include "function.hxx"
+#include "variable.hxx"
+#include "coreutils.hxx"
 
-
-double sum(unsigned len, double * ele)
+double sum(const function::fnbase_vec & args)
 {
   double res(0.);
-  for (unsigned i = 0; i < len; ++i) {
-    res += ele[i];
+  for (unsigned i = 0; i < args.size(); ++i) {
+    res += double(*args[i]);
   }
   return res;
 }
@@ -16,22 +17,24 @@ double sum(unsigned len, double * ele)
 int main()
 {
   double array[3] = {1, 2, 3};
-  function myfunc(3, array, sum);
+
+  function &myfunc = make_function(sum, 3, array);
 
   std::cout << "automatic conversion: myfunc: " << myfunc << std::endl;
 
-  double * array2 = myfunc.params().second;
-  array2[2] = 4;
-  array2[1] = 3;
+  auto& vars = myfunc.components();
+  vars[1] = function::fnbase_ptr(new variable(3));
+  vars[2] = function::fnbase_ptr(new variable(5));
   std::cout << "parameter change (direct): myfunc: " << myfunc << std::endl;
 
   try {
-    myfunc.set_param(1, 2);
-    myfunc.set_param(2, 3);
+    myfunc.replace(0, function::fnbase_ptr(new variable(2)));
+    myfunc.replace(1, function::fnbase_ptr(new variable(4)));
+    myfunc.replace(2, function::fnbase_ptr(new variable(6)));
     std::cout << "parameter change (setter): myfunc: " << myfunc << std::endl;
-    myfunc.set_param(3, 5);
+    myfunc.replace(3, function::fnbase_ptr(new variable(2)));
   } catch (std::out_of_range &exc) {
-    std::cout << "exception handling: "<< exc.what();
+    std::cout << "exception handling: "<< exc.what() << std::endl;
   }
 
   return 0;
