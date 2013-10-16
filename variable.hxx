@@ -18,7 +18,7 @@ public:
 
   inline variable & operator=(const variable & other) {
     _min = other._min;
-    _max =other._max;
+    _max = other._max;
     _val = other._val;
     return *this;
   }
