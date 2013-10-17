@@ -10,7 +10,7 @@
 class function : public function_base {
 public:
   typedef std::vector<fnbase_ptr> fnbase_vec;
-  typedef double (* fptr_t) (const fnbase_vec &);
+  typedef double (* fptr_t) (std::vector<double> &);
 
   function(fptr_t fptr, fnbase_vec args)
     : _fptr(fptr), _args(args) {}

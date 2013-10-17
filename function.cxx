@@ -6,7 +6,11 @@
 
 function::operator double () const
 {
-  return _fptr(_args);
+  std::vector<double> args;
+  for (auto itr = _args.begin(); itr != _args.end(); ++itr) {
+    args.push_back(**itr);	// itr is pointer to fnbase_ptr
+  }
+  return _fptr(args);
 }
 
 void function::replace(const unsigned idx, const fnbase_ptr arg)
