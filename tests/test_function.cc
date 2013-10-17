@@ -20,18 +20,18 @@ int main()
 
   function &myfunc = make_function(sum, 3, array);
 
-  std::cout << "automatic conversion: myfunc: " << myfunc << std::endl;
+  std::cout << "automatic conversion: myfunc: 1+2+3 = " << myfunc << std::endl;
 
   auto& vars = myfunc.components();
   vars[1] = fnbase_ptr(new variable(3));
   vars[2] = fnbase_ptr(new variable(5));
-  std::cout << "parameter change (direct): myfunc: " << myfunc << std::endl;
+  std::cout << "parameter change (direct): myfunc: 1+3+5 = " << myfunc << std::endl;
 
   try {
-    myfunc.replace(0, fnbase_ptr(new variable(2)));
-    myfunc.replace(1, fnbase_ptr(new variable(4)));
-    myfunc.replace(2, fnbase_ptr(new variable(6)));
-    std::cout << "parameter change (setter): myfunc: " << myfunc << std::endl;
+    for (unsigned i = 0; i < 3; ++i) {
+      myfunc.replace(i, fnbase_ptr(new variable((i+1) * 2)));
+    }
+    std::cout << "parameter change (setter): myfunc: 2+4+6 = " << myfunc << std::endl;
     myfunc.replace(3, fnbase_ptr(new variable(2)));
   } catch (std::out_of_range &exc) {
     std::cout << "exception handling: "<< exc.what() << std::endl;
