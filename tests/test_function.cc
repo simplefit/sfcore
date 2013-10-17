@@ -52,10 +52,10 @@ BOOST_FIXTURE_TEST_CASE(setter_access, fnsetup)
 
 BOOST_FIXTURE_TEST_CASE(index_out_of_range_exception, fnsetup)
 {
-  BOOST_CHECK_THROW(myfunc->replace(3, new variable(2)),
-		    std::out_of_range);
-  // BOOST_CHECK_EXCEPTION(myfunc->replace(3, new variable(2)),
-  // 			std::out_of_range, predicate);
+  BOOST_REQUIRE_THROW(myfunc->replace(3, new variable(2)),
+		      std::out_of_range);
+  // BOOST_REQUIRE_EXCEPTION(myfunc->replace(3, new variable(2)),
+  // 			  std::out_of_range, predicate);
 }
 
 BOOST_AUTO_TEST_SUITE_END()

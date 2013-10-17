@@ -1,7 +1,6 @@
 #define BOOST_TEST_MODULE test_variable
 
 #include <stdexcept>
-
 #include <boost/test/included/unit_test.hpp>
 
 #include "variable.hxx"
@@ -34,8 +33,9 @@ BOOST_FIXTURE_TEST_CASE(setter_access, varsetup)
 
 BOOST_FIXTURE_TEST_CASE(value_out_of_range_exception, varsetup)
 {
-  BOOST_CHECK_THROW(myvar.set_val(-1), std::out_of_range);
-  // BOOST_CHECK_EQUAL(myvar.set_val(-1), std::out_of_range, predicate);
+  BOOST_REQUIRE_THROW(myvar.set_val(-1), std::out_of_range);
+  // BOOST_REQUIRE_EXCEPTION(myvar.set_val(-1), std::out_of_range,
+  // 			  predicate);
 }
 
 BOOST_AUTO_TEST_SUITE_END()
