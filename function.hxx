@@ -21,6 +21,12 @@ public:
 
   ~function() {};
 
+  inline function & operator=(const function & other) {
+    _fptr = other._fptr;
+    _args = other._args;
+    return *this;
+  }
+
   virtual operator double () const;
 
   void replace(const unsigned idx, fnbase * arg);
