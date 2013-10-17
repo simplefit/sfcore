@@ -13,13 +13,13 @@ function::operator double () const
   return _fptr(args);
 }
 
-void function::replace(const unsigned idx, const fnbase_ptr arg)
+void function::replace(const unsigned idx, fnbase * arg)
 {
   if (idx >= _args.size())
     throw std::out_of_range("Index out of range: "
 			    + std::to_string(_args.size()) + "(size) <= "
 			    + std::to_string(idx) + "(index)");
-  _args.at(idx) = arg;
+  _args.at(idx) = fnbase_ptr(arg);
 }
 
 auto function::components() -> fnbase_vec &

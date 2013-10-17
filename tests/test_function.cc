@@ -29,10 +29,10 @@ int main()
 
   try {
     for (unsigned i = 0; i < 3; ++i) {
-      myfunc.replace(i, fnbase_ptr(new variable((i+1) * 2)));
+      myfunc.replace(i, new variable((i+1) * 2));
     }
     std::cout << "parameter change (setter): myfunc: 2+4+6 = " << myfunc << std::endl;
-    myfunc.replace(3, fnbase_ptr(new variable(2)));
+    myfunc.replace(3, new variable(2));
   } catch (std::out_of_range &exc) {
     std::cout << "exception handling: "<< exc.what() << std::endl;
   }
