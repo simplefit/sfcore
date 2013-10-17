@@ -27,9 +27,11 @@ clean:
 	rm -f $(patsubst %.cc,%,$(TESTS))
 
 tests:	$(patsubst %.cc,%,$(TESTS))
+	@for t in $^; \
+         do \
+            echo -e "\e[1;32mTest\e[0m: $$t"; \
+            LD_LIBRARY_PATH=. $$t --report_level=short; \
+         done
 
 $(patsubst %.cc,%,$(TESTS)):%:	%.cc libsfcore.so
 	$(CXX) -pthread $(OPTS) -I. -L. -lsfcore -o $@ $<
-
-run:	$(patsubst %.cc,%,$(TESTS))
-	@for t in $^; do echo -e "\e[1mTest\e[0m: $$t"; LD_LIBRARY_PATH=. $$t; done
