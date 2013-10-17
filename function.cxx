@@ -17,7 +17,7 @@ void function::replace(const unsigned idx, fnbase * arg)
 {
   if (idx >= _args.size())
     throw std::out_of_range("Index out of range: "
-			    + std::to_string(_args.size()) + "(size) <= "
+			    + std::to_string(_args.size()) + "(size) >= "
 			    + std::to_string(idx) + "(index)");
   _args.at(idx) = fnbase_ptr(arg);
 }
