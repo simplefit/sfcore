@@ -5,9 +5,9 @@
 function & make_function(function::fptr_t fptr,
 			   std::vector<double> args)
 {
-  function::fnbase_vec vars(args.size());
+  fnbase_vec vars(args.size());
   for (unsigned i = 0; i < args.size(); ++i) {
-    vars[i] = function::fnbase_ptr(new variable(args[i]));
+    vars[i] = fnbase_ptr(new variable(args[i]));
   }
   function * fn = new function(fptr, vars);
   return *fn;

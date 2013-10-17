@@ -1,7 +1,6 @@
 #ifndef __simplefit_function__
 #define __simplefit_function__
 
-#include <vector>
 #include <memory>
 
 #include "function_base.hxx"
@@ -9,7 +8,6 @@
 
 class function : public function_base {
 public:
-  typedef std::vector<fnbase_ptr> fnbase_vec;
   typedef double (* fptr_t) (std::vector<double> &);
 
   function(fptr_t fptr, fnbase_vec args)
