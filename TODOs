@@ -42,14 +42,29 @@ Which of the following make more sense:
 - scan range, or
 - evaluate at point.
 
-* DONE Testing
-  CLOSED: [2013-10-17 Thu 22:34]
+* TODO Testing
   :LOGBOOK:
   - State "DONE"       from "TODO"       [2013-10-17 Thu 22:34] \\
     C++ testing switched to Boost.Test.
   :END:
 - Boost.Test
 - Python: =unittest=
+
+** TODO Variable operators [1/6]
+- [X] assignment: returns variable
+- [ ] addition: returns function
+- [ ] subtraction: returns function
+- [ ] multiply: returns function
+- [ ] division: returns function
+- [ ] exponent: returns function
+
+** TODO Function operators [1/6]
+- [X] assignment
+- [ ] addition
+- [ ] subtraction
+- [ ] multiply
+- [ ] division
+- [ ] exponent
 
 * TODO Caching
 - Hash the component-tree.
