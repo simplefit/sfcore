@@ -10,16 +10,17 @@ class function : public function_base {
 public:
   typedef double (* fptr_t) (std::vector<double> &);
 
-  function(fptr_t fptr, fnbase_vec args)
-    : _fptr(fptr), _args(args) {}
+  function(fptr_t fptr, fnbase_vec & args);
 
-  function(fptr_t fptr, unsigned num, fnbase_ptr * args)
-    : _fptr(fptr), _args(args, args + num) {}
+  function(fptr_t fptr, unsigned num, fnbase_ptr * args);
 
-  function(const function & other)
-    : _fptr(other._fptr), _args(other._args) {}
+  function(fptr_t fptr, std::vector<fnbase*> & args);
 
-  ~function() {};
+  function(fptr_t fptr, unsigned num, fnbase * args);
+
+  function(const function & other);
+
+  ~function();
 
   inline function & operator=(const function & other) {
     _fptr = other._fptr;

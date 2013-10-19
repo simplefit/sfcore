@@ -7,6 +7,8 @@
 
 class function_base {
 public:
+  // function_base() {}
+  virtual ~function_base() = 0;
   virtual operator double () const = 0;
 };
 
