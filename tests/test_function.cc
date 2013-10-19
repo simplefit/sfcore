@@ -3,7 +3,6 @@
 #include <stdexcept>
 #include <boost/test/included/unit_test.hpp>
 
-#include "function.hxx"
 #include "variable.hxx"
 #include "coreutils.hxx"
 
@@ -48,6 +47,16 @@ BOOST_FIXTURE_TEST_CASE(setter_access, fnsetup)
     myfunc->replace(i, new variable((i+1) * 2));
   }
   BOOST_CHECK_EQUAL(12, *myfunc); // 2+4+6
+}
+
+BOOST_AUTO_TEST_CASE(functional)
+{
+  double array[3] = {1, 2, 3};
+  function myfunc1 = make_function(sum, 3, array); // 1+2+3
+  function myfunc2 = make_function(sum, 3, array); // 1+2+3
+  fnbase_vec vars {fnbase_ptr(&myfunc1), fnbase_ptr(&myfunc2)};
+  function * grandsum = new function(sum, vars); // 6+6
+  BOOST_CHECK_EQUAL(12, *grandsum);
 }
 
 BOOST_FIXTURE_TEST_CASE(assignment_operator, fnsetup)
