@@ -20,7 +20,7 @@ public:
 
   function(const function & other);
 
-  ~function();
+  virtual ~function();
 
   inline function & operator=(const function & other) {
     _fptr = other._fptr;
