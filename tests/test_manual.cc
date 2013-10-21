@@ -18,9 +18,9 @@ double sum(std::vector<double> & args)
 int main()
 {
   double array[3] = {1, 2, 3};
-  function myfunc1 = make_function(sum, 3, array); // 1+2+3
-  function myfunc2 = make_function(sum, 3, array); // 1+2+3
-  fnbase_vec vars {fnbase_ptr(&myfunc1), fnbase_ptr(&myfunc2)};
+  auto myfunc1 = fnbase_ptr(&make_function(sum, 3, array)); // 1+2+3
+  auto myfunc2 = fnbase_ptr(&make_function(sum, 3, array)); // 1+2+3
+  fnbase_vec vars {myfunc1, myfunc2};
   function grandsum(sum, vars); // 6+6
   assert(12 == grandsum);
   return 0;

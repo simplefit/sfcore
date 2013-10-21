@@ -28,18 +28,6 @@ struct fnsetup {
 
 BOOST_AUTO_TEST_SUITE(test)
 
-BOOST_AUTO_TEST_CASE(base_class)
-{
-  double array[3] = {1, 2, 3};
-  function myfunc1 = make_function(sum, 3, array); // 1+2+3
-  function myfunc2 = make_function(sum, 3, array); // 1+2+3
-  fnbase_vec vars {fnbase_ptr(&myfunc1), fnbase_ptr(&myfunc2)};
-  function grandsum(sum, vars); // 6+6
-  BOOST_CHECK_EQUAL(12, grandsum);
-  // function * grandsum = new function(sum, vars); // 6+6
-  // BOOST_CHECK_EQUAL(12, *grandsum);
-}
-
 BOOST_FIXTURE_TEST_CASE(automatic_conversion, fnsetup)
 {
   BOOST_CHECK_EQUAL(6.0, *myfunc); // 1+2+3
@@ -64,11 +52,13 @@ BOOST_FIXTURE_TEST_CASE(setter_access, fnsetup)
 BOOST_AUTO_TEST_CASE(functional)
 {
   double array[3] = {1, 2, 3};
-  function myfunc1 = make_function(sum, 3, array); // 1+2+3
-  function myfunc2 = make_function(sum, 3, array); // 1+2+3
-  fnbase_vec vars {fnbase_ptr(&myfunc1), fnbase_ptr(&myfunc2)};
-  function * grandsum = new function(sum, vars); // 6+6
-  BOOST_CHECK_EQUAL(12, *grandsum);
+  auto myfunc1 = fnbase_ptr(&make_function(sum, 3, array)); // 1+2+3
+  auto myfunc2 = fnbase_ptr(&make_function(sum, 3, array)); // 1+2+3
+  fnbase_vec vars {myfunc1, myfunc2};
+  function grandsum(sum, vars); // 6+6
+  BOOST_CHECK_EQUAL(12, grandsum);
+  function * grandsum_ptr = new function(sum, vars); // 6+6
+  BOOST_CHECK_EQUAL(12, *grandsum_ptr);
 }
 
 BOOST_FIXTURE_TEST_CASE(assignment_operator, fnsetup)
