@@ -1,18 +1,19 @@
 #define BOOST_TEST_MODULE test_variable
 
 #include <stdexcept>
+
 #include <boost/test/included/unit_test.hpp>
 
 #include "variable.hxx"
 
+
+BOOST_AUTO_TEST_SUITE(test_variable)
 
 struct varsetup {
   varsetup() : myvar(0, 5, 3) {}
   ~varsetup() {}
   variable myvar;
 };
-
-BOOST_AUTO_TEST_SUITE(test_variable)
 
 BOOST_FIXTURE_TEST_CASE(automatic_conversion, varsetup)
 {

@@ -1,11 +1,14 @@
 #define BOOST_TEST_MODULE test_function
 
 #include <stdexcept>
+
 #include <boost/test/included/unit_test.hpp>
 
 #include "variable.hxx"
 #include "coreutils.hxx"
 
+
+BOOST_AUTO_TEST_SUITE(test_function)
 
 double sum(std::vector<double> & args)
 {
@@ -22,11 +25,12 @@ struct fnsetup {
     double array[3] = {1, 2, 3};
     myfunc = &make_function(sum, 3, array);
   }
-  ~fnsetup() {}
+  ~fnsetup()
+  {
+    delete myfunc;
+  }
   function * myfunc;
 };
-
-BOOST_AUTO_TEST_SUITE(test)
 
 BOOST_FIXTURE_TEST_CASE(automatic_conversion, fnsetup)
 {
@@ -59,6 +63,7 @@ BOOST_AUTO_TEST_CASE(functional)
   BOOST_CHECK_EQUAL(12, grandsum);
   function * grandsum_ptr = new function(sum, vars); // 6+6
   BOOST_CHECK_EQUAL(12, *grandsum_ptr);
+  delete grandsum_ptr;
 }
 
 BOOST_FIXTURE_TEST_CASE(assignment_operator, fnsetup)
