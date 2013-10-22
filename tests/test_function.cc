@@ -66,12 +66,6 @@ BOOST_AUTO_TEST_CASE(functional)
   delete grandsum_ptr;
 }
 
-BOOST_FIXTURE_TEST_CASE(assignment_operator, fnsetup)
-{
-  function newfn = *myfunc;
-  BOOST_CHECK_EQUAL(*myfunc, newfn);
-}
-
 BOOST_FIXTURE_TEST_CASE(index_out_of_range_exception, fnsetup)
 {
   BOOST_REQUIRE_THROW(myfunc->replace(3, new variable(2)),
