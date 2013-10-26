@@ -27,6 +27,10 @@ public:
 
   inline bool check_bounds() const { return check_bounds(_val); }
 
+  inline bool is_constant() const {
+    return (_min == _max and _min == _val);
+  }
+
   void set_val(const double val);
 
 protected:

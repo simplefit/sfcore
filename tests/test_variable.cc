@@ -20,6 +20,12 @@ BOOST_FIXTURE_TEST_CASE(automatic_conversion, varsetup)
   BOOST_CHECK_EQUAL(3.0, myvar);
 }
 
+BOOST_AUTO_TEST_CASE(constant)
+{
+  variable constvar(5);
+  BOOST_CHECK(constvar.is_constant());
+}
+
 BOOST_FIXTURE_TEST_CASE(setter_access, varsetup)
 {
   myvar.set_val(1);
