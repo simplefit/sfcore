@@ -8,11 +8,9 @@ class variable : public function_base {
 public:
   variable(const double min, const double max, const double val);
 
-  variable(const double val)
-    : _min(val), _max(val), _val(val) {}
+  variable(const double val);
 
-  variable(const variable & other)
-    : _min(other._min), _max(other._max), _val(other._val) {}
+  variable(const variable & other);
 
   ~variable() {}
 
