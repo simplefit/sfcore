@@ -40,8 +40,8 @@ BOOST_FIXTURE_TEST_CASE(automatic_conversion, fnsetup)
 BOOST_FIXTURE_TEST_CASE(direct_access, fnsetup)
 {
   auto& vars = myfunc->components();
-  vars[1] = fnbase_ptr(new variable(3));
-  vars[2] = fnbase_ptr(new variable(5));
+  vars[1] = std::make_shared<variable>(3);
+  vars[2] = std::make_shared<variable>(5);
   BOOST_CHECK_EQUAL(9, *myfunc); // 1+3+5
 }
 
