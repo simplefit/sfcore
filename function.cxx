@@ -2,6 +2,7 @@
 #include <string>
 
 #include "function.hxx"
+#include "variable.hxx"
 
 
 //////////////////
@@ -29,6 +30,12 @@ function::function(fptr_t fptr, unsigned num, fnbase * args)
   for (unsigned i = 0; i < num; ++i) {
     _args[i] = fnbase_ptr(&args[i]);
   }
+}
+
+function::function() : _args(1)
+{
+  _args[0] = std::make_shared<variable>();
+  _fptr = [](std::vector<double> & args) { return args.front(); };
 }
 
 function::function(const function & other)

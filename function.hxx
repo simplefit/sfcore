@@ -18,6 +18,8 @@ public:
 
   function(fptr_t fptr, unsigned num, fnbase * args);
 
+  function();
+
   function(const function & other);
 
   virtual ~function();

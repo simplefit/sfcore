@@ -8,7 +8,7 @@ class variable : public function_base {
 public:
   variable(const double min, const double max, const double val);
 
-  variable(const double val);
+  variable(const double val=1);
 
   variable(const variable & other);
 
