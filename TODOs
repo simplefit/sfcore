@@ -16,6 +16,7 @@ from the same base class.
   Possible underlying datastructures:
   - inherit directly from base class: a double, or vector of 1 double,
   - inherit from function: linear function with a double (overkill?).
+- [ ] Types of variables: value, category, boolean
 - [ ] Constants:
   - variables with 0 range (min = max = val),
   - variables bound to values (=boost::bind=).
