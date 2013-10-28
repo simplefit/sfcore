@@ -24,18 +24,13 @@ BOOST_AUTO_TEST_CASE(constant)
 {
   variable constvar(5);
   BOOST_CHECK(constvar.is_constant());
+  BOOST_REQUIRE_THROW(constvar.set_val(4), std::logic_error);
 }
 
 BOOST_FIXTURE_TEST_CASE(setter_access, varsetup)
 {
   myvar.set_val(1);
   BOOST_CHECK_EQUAL(1, myvar);
-}
-
-BOOST_FIXTURE_TEST_CASE(assignment_operator, varsetup)
-{
-  variable myvar2 = myvar;
-  BOOST_CHECK_EQUAL(myvar, myvar2);
 }
 
 BOOST_FIXTURE_TEST_CASE(value_out_of_range_exception, varsetup)
