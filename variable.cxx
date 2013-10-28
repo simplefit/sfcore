@@ -26,6 +26,9 @@ variable::variable(const variable & other)
 
 void variable::set_val(const double val)
 {
+  if (is_constant()) {
+    throw std::logic_error("Cannot modify constant `variable'!");
+  }
   if (check_bounds(val)) {
     _val = val;
   }
