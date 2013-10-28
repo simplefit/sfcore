@@ -7,10 +7,11 @@
 #include <boost/mpl/list.hpp>
 
 #include "variable.hxx"
+#include "boolean.hxx"
 #include "function.hxx"
 
 
-typedef boost::mpl::list<variable,function> types;
+typedef boost::mpl::list<variable,boolean,function> types;
 
 BOOST_AUTO_TEST_SUITE(test_types)
 
