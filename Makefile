@@ -31,7 +31,7 @@ tests:	$(patsubst %.cc,%,$(TESTS))
          do \
             echo -e "\e[1;32mTest\e[0m: $$t"; \
             LD_LIBRARY_PATH=. $$t --report_level=short; \
-         done
+         done |& sed -e $$'s%error\|failed\|aborted%\033[1;31m&\033[0m%g'
 
 $(patsubst %.cc,%,$(TESTS)):%:	%.cc libsfcore.so
 	$(CXX) -pthread $(OPTS) -I. -L. -lsfcore -o $@ $<
