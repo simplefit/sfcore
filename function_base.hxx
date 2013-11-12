@@ -15,6 +15,6 @@ public:
 // typedefs for convenience
 typedef function_base fnbase;
 typedef std::shared_ptr<function_base> fnbase_ptr;
-typedef std::vector<fnbase_ptr> fnbase_vec;
+typedef std::vector<fnbase_ptr> fnbase_ptr_vec;
 
 #endif	// __simplefit_function_base__

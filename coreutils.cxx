@@ -7,7 +7,7 @@
 function & make_function(function::fptr_t fptr,
 			 std::vector<double> args)
 {
-  fnbase_vec vars(args.size());
+  fnbase_ptr_vec vars(args.size());
   for (unsigned i = 0; i < args.size(); ++i) {
     vars[i] = std::make_shared<variable>(args[i]);
   }

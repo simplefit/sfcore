@@ -10,7 +10,7 @@ class function : public function_base {
 public:
   typedef double (* fptr_t) (std::vector<double> &);
 
-  function(fptr_t fptr, fnbase_vec & args);
+  function(fptr_t fptr, fnbase_ptr_vec & args);
 
   function(fptr_t fptr, unsigned num, fnbase_ptr * args);
 
@@ -34,11 +34,11 @@ public:
 
   void replace(const unsigned idx, fnbase * arg);
 
-  fnbase_vec& components();
+  fnbase_ptr_vec& components();
 
 private:
   fptr_t _fptr;
-  fnbase_vec _args;
+  fnbase_ptr_vec _args;
 };
 
 #endif	// __simplefit_function__

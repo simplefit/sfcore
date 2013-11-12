@@ -58,7 +58,7 @@ BOOST_AUTO_TEST_CASE(functional)
   double array[3] = {1, 2, 3};
   auto myfunc1 = fnbase_ptr(&make_function(sum, 3, array)); // 1+2+3
   auto myfunc2 = fnbase_ptr(&make_function(sum, 3, array)); // 1+2+3
-  fnbase_vec vars {myfunc1, myfunc2};
+  fnbase_ptr_vec vars {myfunc1, myfunc2};
   function grandsum(sum, vars); // 6+6
   BOOST_CHECK_EQUAL(12, grandsum);
   function * grandsum_ptr = new function(sum, vars); // 6+6

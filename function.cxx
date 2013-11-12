@@ -9,7 +9,7 @@
 // Constructors //
 //////////////////
 
-function::function(fptr_t fptr, fnbase_vec & args)
+function::function(fptr_t fptr, fnbase_ptr_vec & args)
   : _fptr(fptr), _args(args) {}
 
 function::function(fptr_t fptr, unsigned num, fnbase_ptr * args)
@@ -69,7 +69,7 @@ void function::replace(const unsigned idx, fnbase * arg)
   _args.at(idx) = fnbase_ptr(arg);
 }
 
-auto function::components() -> fnbase_vec &
+auto function::components() -> fnbase_ptr_vec &
 {
   return _args;
 }

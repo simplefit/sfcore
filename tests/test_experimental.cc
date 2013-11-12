@@ -25,7 +25,7 @@ struct compsetup {
   {
     myfuncvar = std::make_shared<function>(); // 1
     myvar = std::make_shared<variable>();     // 1
-    fnbase_vec vars {myfuncvar, myvar};
+    fnbase_ptr_vec vars {myfuncvar, myvar};
     varsum = std::make_shared<function>(sum, vars); // 1+1
   }
   ~compsetup() {}
