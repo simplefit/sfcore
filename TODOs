@@ -1,6 +1,6 @@
 # -*- mode: org; -*-
 
-* TODO Functions & variables [2/5]
+* TODO [#A] Functions & variables [2/5]
 A function can be parametrised by variables as well as functions.
 Easiest way to achieve type agnostic expression is by inheriting
 from the same base class.
@@ -27,7 +27,11 @@ from the same base class.
   - Different signatures, (arg1, arg2, ...) but overloaded with
     =boost::make_overloaded_function()= to a standard interface.
 
-* TODO Operators [0/2]
+** TODO [#A] Hide use of shared pointers
+Do not take function parameters as pointers.  Make copies inside the
+constructor.
+
+* TODO [#A] Operators [0/2]
 ** TODO Mathematical operators
 Global mathematical operator overloads:
 - assignment: =operator==,
@@ -45,14 +49,6 @@ Which of the following make more sense:
 - scan range, or
 - evaluate at point.
 
-* TODO Testing
-  :LOGBOOK:
-  - State "DONE"       from "TODO"       [2013-10-17 Thu 22:34] \\
-    C++ testing switched to Boost.Test.
-  :END:
-- Boost.Test
-- Python: =unittest=
-
 ** TODO Variable operators [1/6]
 - [X] assignment: returns variable
 - [ ] addition: returns function
@@ -69,16 +65,35 @@ Which of the following make more sense:
 - [ ] division
 - [ ] exponent
 
-* TODO Caching
+* TODO [#B] Integrals [0/2]
+** TODO Analytical integration
+- Ask for function objects for integrands, and integrals.
+- Each integral associated with a set of integration variables.
+
+** TODO Numerical integration
+- GSL
+- ROOT
+- Boost.Numeric.Odeint
+- All of the above as user configurable backends?
+
+* TODO [#A] Testing [1/2]
+  :LOGBOOK:
+  - State "DONE"       from "TODO"       [2013-10-17 Thu 22:34] \\
+    C++ testing switched to Boost.Test.
+  :END:
+- [X] Boost.Test
+- [ ] Python: =unittest=
+
+* TODO [#C] Caching
 - Hash the component-tree.
   - Should be possible to update only modified branches of the tree.
   - Look at git tree objects for ideas.
 - Caveat: hash function should be faster than evaluation.
 
-* TODO Fitter
+* TODO [#C] Fitter
 Use generic TFitter to build an interface to Minuit.
 
-* TODO Logging
+* TODO [#C] Logging
 Boost.Log
 
 ** Debugging tools
@@ -87,5 +102,5 @@ dependency information.  The dependency tree traversal should be both
 ways: dependants as well as dependencies.  Maybe limit to one hop, or
 ask for number of hops when instantiating the debugger.
 
-* TODO Bindings
+* TODO [#C] Bindings
 Boost.Python
