@@ -14,7 +14,7 @@
 BOOST_AUTO_TEST_SUITE(test_experimental)
 
 struct compsetup {
-  compsetup() : myfuncvar(NULL), myvar(NULL), varsum(NULL)
+  compsetup() : myfuncvar(nullptr), myvar(nullptr), varsum(nullptr)
   {
     myfuncvar = std::make_shared<function>(); // 1
     myvar = std::make_shared<variable>();     // 1

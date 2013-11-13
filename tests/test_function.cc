@@ -13,7 +13,7 @@
 BOOST_AUTO_TEST_SUITE(test_function)
 
 struct fnsetup {
-  fnsetup() : myfunc(NULL)
+  fnsetup() : myfunc(nullptr)
   {
     double array[3] = {1, 2, 3};
     myfunc = new function(sum, 3, array);

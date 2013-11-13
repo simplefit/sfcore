@@ -16,7 +16,7 @@ function::function() : _args(1)
 }
 
 function::function(fptr_t fptr, std::vector<double> args)
-  : _fptr(fptr), _args(args.size())
+  : _fptr(fptr), _args(args.size(), nullptr)
 {
   for (unsigned i = 0; i < _args.size(); ++i) {
     _args[i] = std::make_shared<variable>(args[i]);
@@ -24,7 +24,7 @@ function::function(fptr_t fptr, std::vector<double> args)
 }
 
 function::function(fptr_t fptr, unsigned num, double * args)
-  : _fptr(fptr), _args(num)
+  : _fptr(fptr), _args(num, nullptr)
 {
   for (unsigned i = 0; i < num; ++i) {
     _args[i] = std::make_shared<variable>(args[i]);
@@ -39,7 +39,7 @@ function::function(fptr_t fptr, unsigned num, fnbase_ptr * args)
 
 // FIXME: Check validity of shared_ptr
 function::function(fptr_t fptr, std::vector<fnbase*> & args)
-  : _fptr(fptr), _args(args.size())
+  : _fptr(fptr), _args(args.size(), nullptr)
 {
   unsigned size(args.size());
   for (unsigned i = 0; i < size; ++i) {
