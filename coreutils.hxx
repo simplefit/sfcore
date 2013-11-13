@@ -11,8 +11,9 @@
 template <typename T>
 fnbase_ptr_vec pod_to_variable(std::vector<T> args)
 {
-  fnbase_ptr_vec vars(args.size());
-  for (unsigned i = 0; i < args.size(); ++i) {
+  unsigned size(args.size());
+  fnbase_ptr_vec vars(size, nullptr);
+  for (unsigned i = 0; i < size; ++i) {
     vars[i] = std::make_shared<variable>(args[i]);
   }
   return vars;
