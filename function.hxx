@@ -1,8 +1,6 @@
 #ifndef __simplefit_function__
 #define __simplefit_function__
 
-#include <memory>
-
 #include "function_base.hxx"
 
 

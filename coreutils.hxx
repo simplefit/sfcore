@@ -1,9 +1,6 @@
 #ifndef __simplefit_coreutils__
 #define __simplefit_coreutils__
 
-#include <vector>
-#include <memory>
-
 #include "variable.hxx"
 #include "function.hxx"
 
