@@ -6,10 +6,8 @@
 #include "function.hxx"
 
 
-function & make_function(function::fptr_t fptr,
-			 std::vector<double> args);
+fnbase_ptr_vec pod_to_variable(std::vector<double> args);
 
-function & make_function(function::fptr_t fptr,
-			 unsigned num, double * args);
+fnbase_ptr_vec pod_to_variable(unsigned num, double * args);
 
 #endif	// __simplefit_coreutils__

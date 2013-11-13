@@ -4,20 +4,17 @@
 #include "variable.hxx"
 
 
-function & make_function(function::fptr_t fptr,
-			 std::vector<double> args)
+fnbase_ptr_vec pod_to_variable(std::vector<double> args)
 {
   fnbase_ptr_vec vars(args.size());
   for (unsigned i = 0; i < args.size(); ++i) {
     vars[i] = std::make_shared<variable>(args[i]);
   }
-  function * fn = new function(fptr, vars);
-  return *fn;
+  return vars;
 }
 
-function & make_function(function::fptr_t fptr,
-			 unsigned num, double * args)
+fnbase_ptr_vec pod_to_variable(unsigned num, double * args)
 {
   std::vector<double> vals(args, args + num);
-  return make_function(fptr, vals);
+  return pod_to_variable(vals);
 }

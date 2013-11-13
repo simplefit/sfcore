@@ -23,7 +23,7 @@ struct fnsetup {
   fnsetup() : myfunc(NULL)
   {
     double array[3] = {1, 2, 3};
-    myfunc = &make_function(sum, 3, array);
+    myfunc = new function(sum, 3, array);
   }
   ~fnsetup()
   {
@@ -56,8 +56,9 @@ BOOST_FIXTURE_TEST_CASE(setter_access, fnsetup)
 BOOST_AUTO_TEST_CASE(functional)
 {
   double array[3] = {1, 2, 3};
-  auto myfunc1 = fnbase_ptr(&make_function(sum, 3, array)); // 1+2+3
-  auto myfunc2 = fnbase_ptr(&make_function(sum, 3, array)); // 1+2+3
+  auto vararray = pod_to_variable(3, array);
+  auto myfunc1 = std::make_shared<function>(sum, vararray); // 1+2+3
+  auto myfunc2 = std::make_shared<function>(sum, vararray); // 1+2+3
   fnbase_ptr_vec vars {myfunc1, myfunc2};
   function grandsum(sum, vars); // 6+6
   BOOST_CHECK_EQUAL(12, grandsum);
