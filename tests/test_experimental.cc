@@ -8,17 +8,10 @@
 #include "variable.hxx"
 #include "function.hxx"
 
+#include "testutils.hh"
+
 
 BOOST_AUTO_TEST_SUITE(test_experimental)
-
-double sum(std::vector<double> & args)
-{
-  double res(0.);
-  for (unsigned i = 0; i < args.size(); ++i) {
-    res += double(args[i]);
-  }
-  return res;
-}
 
 struct compsetup {
   compsetup() : myfuncvar(NULL), myvar(NULL), varsum(NULL)
