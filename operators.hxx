@@ -1,17 +1,19 @@
 #ifndef __simplefit_operators__
 #define __simplefit_operators__
 
-class fnbase;
-class function;
+#include "function.hxx"
 
-function & operator+(fnbase & lhs, const fnbase & rhs);
 
-function & operator-(fnbase & lhs, const fnbase & rhs);
+// FIXME: it should take const references
 
-function & operator*(fnbase & lhs, const fnbase & rhs);
+function & operator+(fnbase & lhs, fnbase & rhs);
 
-function & operator/(fnbase & lhs, const fnbase & rhs);
+function & operator-(fnbase & lhs, fnbase & rhs);
 
-function & operator^(fnbase & lhs, const fnbase & rhs);
+function & operator*(fnbase & lhs, fnbase & rhs);
+
+function & operator/(fnbase & lhs, fnbase & rhs);
+
+// function & operator^(fnbase & lhs, fnbase & rhs);
 
 #endif	// __simplefit_operators__
