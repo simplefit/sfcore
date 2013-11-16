@@ -4,7 +4,6 @@
 
 #include <boost/test/included/unit_test.hpp>
 
-#include "variable.hxx"
 #include "coreutils.hxx"
 
 #include "testutils.hh"
