@@ -1,6 +1,6 @@
 # -*- mode: org; -*-
 
-* TODO [#A] Functions & variables [2/5]
+* TODO [#A] Functions & variables [3/6]
 A function can be parametrised by variables as well as functions.
 Easiest way to achieve type agnostic expression is by inheriting
 from the same base class.
@@ -12,10 +12,11 @@ from the same base class.
 - [X] Function class: the most generic function.  Data members:
   - function pointer,
   - vector of base class pointers as arguments to function.
-- [ ] Variables (parameters/observables) are linear functions.
+- [X] Variables (parameters/observables) are linear functions.
   Possible underlying datastructures:
   - inherit directly from base class: a double, or vector of 1 double,
   - inherit from function: linear function with a double (overkill?).
+  - Final: Use separate class with a double.
 - [ ] Types of variables: value, category, boolean
   - category: derive from =function_base= or =function=?  The latter
     seems more natural.
