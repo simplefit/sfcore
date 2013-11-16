@@ -32,12 +32,18 @@ Do not take function parameters as pointers.  Make copies inside the
 constructor.
 
 * TODO [#A] Operators [0/2]
-** TODO Mathematical operators
+** TODO Mathematical operators [3/6]
 Global mathematical operator overloads:
-- assignment: =operator==,
-- addition & subtraction: =operator+= & =operator-=,
+- assignment: 
 - multiplication & division: =operator*= & =operator/=,
 - exponentiation: =operator^= (okay since bitwise OR isn't defined).
+
+- [X] assignment: =operator==,
+- [X] addition & subtraction (binary): ~res = lhs +/- rhs~,
+- [ ] sign (unary, +ve/-ve): ~res = +/- obj~,
+- [X] multiplication & division: ~res = lhs *// rhs~,
+- [ ] multiplication & division (with doubles): ~res = num *// obj~,
+- [ ] exponent: =operator^=
 
 ** TODO Comparison operators
 It is not clear what should be the implementation for comparison
@@ -48,22 +54,6 @@ dependency tree comparison.
 Which of the following make more sense:
 - scan range, or
 - evaluate at point.
-
-** TODO Variable operators [1/6]
-- [X] assignment: returns variable
-- [ ] addition: returns function
-- [ ] subtraction: returns function
-- [ ] multiply: returns function
-- [ ] division: returns function
-- [ ] exponent: returns function
-
-** TODO Function operators [1/6]
-- [X] assignment
-- [ ] addition
-- [ ] subtraction
-- [ ] multiply
-- [ ] division
-- [ ] exponent
 
 * TODO [#B] Integrals [0/2]
 ** TODO Analytical integration
