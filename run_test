@@ -1,5 +1,0 @@
-#!/bin/bash
-
-echo -e "\e[1;32mTest\e[0m: $1";
-LD_LIBRARY_PATH=. $@ --report_level=short \
-    |& sed -e $$'s%error\|failed\|aborted%\033[1;31m&\033[0m%g'
