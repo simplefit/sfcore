@@ -99,6 +99,10 @@ BOOST_FIXTURE_TEST_CASE(polymorphic_binary, poly_fnsetup)
   function mydiv2 = *myfunc / *myvar;
   BOOST_CHECK_EQUAL(6.0/7.0, mydiv2); // (1+2+3) / 7
 
+  variable unity(1.0);
+  function inv =  unity / *myvar;
+  BOOST_CHECK_EQUAL(1.0/7.0, inv); // 1 / 7
+
   function zero = *myfunc - *myfunc;
   BOOST_CHECK_EQUAL(0.0, zero);
   function inf = *myvar / zero;
