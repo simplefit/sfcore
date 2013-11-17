@@ -3,6 +3,15 @@
 #include "operators.hxx"
 
 
+function & operator-(fnbase & rhs)
+{
+  function::fptr_t neg_fptr = [](std::vector<double> & args) {
+    return -args.front();
+  };
+  function * neg = new function(neg_fptr, 1, &rhs);
+  return *neg;
+}
+
 function & operator+(fnbase & lhs, fnbase & rhs)
 {
   fnbase_ptr_vec sum_args = {fnbase_ptr(&lhs), fnbase_ptr(&rhs)};

@@ -30,14 +30,14 @@ struct fnsetup {
   function * myfunc2;
 };
 
-struct mix_fnsetup {
-  mix_fnsetup() : myvar(nullptr), myfunc(nullptr)
+struct poly_fnsetup {
+  poly_fnsetup() : myvar(nullptr), myfunc(nullptr)
   {
     myvar = new variable(0, 10, 7);
     double array[3] = {1, 2, 3};
     myfunc = new function(sum, 3, array);
   }
-  ~mix_fnsetup()
+  ~poly_fnsetup()
   {
     delete myvar;
     delete myfunc;
@@ -45,6 +45,15 @@ struct mix_fnsetup {
   variable * myvar;
   function * myfunc;
 };
+
+BOOST_FIXTURE_TEST_CASE(unary, poly_fnsetup)
+{
+  function newfunc1 = -*myvar;
+  BOOST_CHECK_EQUAL(-7.0, newfunc1); // -7
+
+  function newfunc2 = -*myfunc;
+  BOOST_CHECK_EQUAL(-6.0, newfunc2); // -7
+}
 
 BOOST_FIXTURE_TEST_CASE(binary, fnsetup)
 {
@@ -68,10 +77,10 @@ BOOST_FIXTURE_TEST_CASE(binary, fnsetup)
   function zero = *myfunc1 - *myfunc1;
   BOOST_CHECK_EQUAL(0.0, zero);
   function inf = *myfunc2 / zero;
-  BOOST_CHECK(std::isinf(inf));
+  BOOST_CHECK(std::isinf(inf));	// (4+5+6) / 0
 }
 
-BOOST_FIXTURE_TEST_CASE(mix_binary, mix_fnsetup)
+BOOST_FIXTURE_TEST_CASE(polymorphic_binary, poly_fnsetup)
 {
   function mysum = *myvar + *myfunc;
   BOOST_CHECK_EQUAL(13.0, mysum); // 7 + (1+2+3)
@@ -93,7 +102,7 @@ BOOST_FIXTURE_TEST_CASE(mix_binary, mix_fnsetup)
   function zero = *myfunc - *myfunc;
   BOOST_CHECK_EQUAL(0.0, zero);
   function inf = *myvar / zero;
-  BOOST_CHECK(std::isinf(inf));
+  BOOST_CHECK(std::isinf(inf));	// (1+2+3) / 0
 }
 
 BOOST_AUTO_TEST_SUITE_END()
