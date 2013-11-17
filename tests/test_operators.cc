@@ -109,4 +109,25 @@ BOOST_FIXTURE_TEST_CASE(polymorphic_binary, poly_fnsetup)
   BOOST_CHECK(std::isinf(inf));	// (1+2+3) / 0
 }
 
+BOOST_FIXTURE_TEST_CASE(ownership, poly_fnsetup)
+{
+  function grandsum = *myfunc + *myfunc;
+  BOOST_CHECK_EQUAL(12.0, grandsum); // (1+2+3) + (1+2+3)
+
+  // retrieve pointers
+  auto & comp_ptr_vec = grandsum.components();
+  // since same function, pointers are equal
+  BOOST_CHECK_EQUAL(comp_ptr_vec[0].get(), comp_ptr_vec[1].get());
+  function & sum1 = dynamic_cast<function&>(*comp_ptr_vec[0]);
+  function & sum2 = dynamic_cast<function&>(*comp_ptr_vec[1]);
+
+  // replace variables
+  auto & comp_ptr_vec_1 = sum1.components();
+  comp_ptr_vec_1[0] = std::make_shared<variable>(6); // 1 -> 6
+  BOOST_CHECK_EQUAL(22.0, grandsum); // (6+2+3) + (6+2+3)
+  auto & comp_ptr_vec_2 = sum2.components();
+  comp_ptr_vec_2[1] = std::make_shared<variable>(6); // 2 -> 6
+  BOOST_CHECK_EQUAL(30.0, grandsum); // (6+6+3) + (6+6+3)
+}
+
 BOOST_AUTO_TEST_SUITE_END()
