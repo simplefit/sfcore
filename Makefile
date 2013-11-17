@@ -14,9 +14,18 @@ DEPS		:= $(patsubst %.cxx,.deps/%.d,$(SRCS))
 TESTS		:= $(wildcard tests/test_*.cc)
 TEST_DEPS	:= $(patsubst %.cc,.deps/%.d,$(TESTS))
 
-TEST_RUN_HEADER := echo -e "\e[1;32mTest\e[0m:"
-TEST_RUN_FILTER := sed -e $$'s%error\|failed\|aborted%\033[1;31m&\033[0m%g'
+# colours
+CLEAR		= \033[0m
+ifndef NOCOLOUR
+GREEN		= \033[1;32m
+RED		= \033[1;31m
+else
+GREEN		= $(CLEAR)
+RED		= $(CLEAR)
+endif
 
+TEST_RUN_HEADER := echo -e "$(GREEN)Test$(CLEAR):"
+TEST_RUN_FILTER := sed -e $$'s%error\|failed\|aborted%$(RED)&$(CLEAR)%g'
 
 .PHONY:	all tests clean distclean $(patsubst tests/%.cc,%,$(TESTS))
 
