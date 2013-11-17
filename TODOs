@@ -64,13 +64,23 @@ Which of the following make more sense:
 - Boost.Numeric.Odeint
 - All of the above as user configurable backends?
 
-* TODO [#A] Testing [1/2]
+* TODO [#A] Testing [1/3]
   :LOGBOOK:
   - State "DONE"       from "TODO"       [2013-10-17 Thu 22:34] \\
     C++ testing switched to Boost.Test.
   :END:
-- [X] Boost.Test
-- [ ] Python: =unittest=
+Testing frameworks:
+- C++: Boost.Test
+- Python: =unittest=
+
+Test concepts:
+- [X] Uniqueness of components
+  : sum = (x+y) + (x+y)
+  : x → z ⇒ sum → sum + 2*(z-x)
+- [ ] Possibility of copies in components
+  : sum = (x+y) + (x'+y') (where the 2nd x+y is a copy)
+  : x → z ⇒ sum → sum + (z-x)
+- [ ] Test with different functions
 
 * TODO [#C] Caching
 - Hash the component-tree.
