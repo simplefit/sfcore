@@ -64,6 +64,16 @@ Which of the following make more sense:
 - Boost.Numeric.Odeint
 - All of the above as user configurable backends?
 
+*** Ideas
+- Convert numerical integral into a function.  Integrate once and save
+  as I(x) = ∫f(x')dx' (a,x), where a is the lower bound and x is any
+  value less than the upper bound, b.  Then any arbitrary range ∈(a,b)
+  can be evaluated by two function calls.
+  - Look into primitive of a function (suggested by: Koen, and Pieter)
+- Ask user for inflection points and kinks.  Then can integrate in
+  ranges in b/w the points.  Maybe even have a way to auto-find them
+  when not specified (quick scan in steps of 0.01 of range).
+
 * TODO [#A] Testing [1/3]
   :LOGBOOK:
   - State "DONE"       from "TODO"       [2013-10-17 Thu 22:34] \\
@@ -101,4 +111,6 @@ ways: dependants as well as dependencies.  Maybe limit to one hop, or
 ask for number of hops when instantiating the debugger.
 
 * TODO [#C] Bindings
-Boost.Python
+- Implement getter and setters such that they are easily translateable
+  to python properties with Boost.Python.
+- Revisit inheritance hierarchy from the perspective of bindings.
