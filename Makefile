@@ -28,7 +28,7 @@ $(DEPS):.deps/%.d:	%.cxx | .deps
 	$(CXX) $(CSTD) -MM $< -MF $@
 
 # do not include when cleaning
-ifneq ($(MAKECMDGOALS),clean)
+ifeq ($(findstring clean,$(MAKECMDGOALS)),)
 -include $(DEPS)
 endif
 
@@ -38,7 +38,7 @@ $(patsubst %.cxx,%.o,$(SRCS)):%.o:	%.cxx
 $(TEST_DEPS):.deps/%.d:	%.cc | .deps/tests
 	$(CXX) $(CSTD) -I. -MM $< -MF $@
 
-# not empty when target matches test*
+# not empty when target matches test* (condition is true)
 ifneq ($(filter test%,$(MAKECMDGOALS)),)
 -include $(TEST_DEPS)
 endif
