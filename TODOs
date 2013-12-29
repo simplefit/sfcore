@@ -1,32 +1,53 @@
 # -*- mode: org; -*-
 
-* TODO [#A] Functions & variables [3/6]
+* TODO [#A] Functions & variables [4/8]
 A function can be parametrised by variables as well as functions.
 Easiest way to achieve type agnostic expression is by inheriting
 from the same base class.
 
-- [X] Function base class implementation options: purely virtual, only
-  determines interface (methods).  Use
-  - polymorphism (abstract base class),
-  - templated function pointer for more flexible functions?
-- [X] Function class: the most generic function.  Data members:
-  - function pointer,
-  - vector of base class pointers as arguments to function.
-- [X] Variables (parameters/observables) are linear functions.
-  Possible underlying datastructures:
-  - inherit directly from base class: a double, or vector of 1 double,
-  - inherit from function: linear function with a double (overkill?).
-  - Final: Use separate class with a double.
-- [ ] Types of variables: value, category, boolean
-  - category: derive from =function_base= or =function=?  The latter
-    seems more natural.
-- [ ] Constants:
-  - variables with 0 range (min = max = val),
-  - variables bound to values (=boost::bind=).
-- [ ] Function pointer implementation:
-  - Fixed signature: (number of args, arg array), (vector of args).
-  - Different signatures, (arg1, arg2, ...) but overloaded with
-    =boost::make_overloaded_function()= to a standard interface.
+** DONE [#A] Function/variable base class
+Function base class implementation options: purely virtual, only
+determines interface (methods).  Use
+- polymorphism (abstract base class),
+- templated function pointer for more flexible functions?
+
+** DONE [#A] Functions
+Function class: the most generic function.  Data members:
+- function pointer,
+- vector of base class pointers as arguments to function.
+
+** DONE [#A] Variables
+Variables (parameters/observables) are linear functions.  Possible
+underlying datastructures:
+- inherit directly from base class: a double, or vector of 1 double,
+- inherit from function: linear function with a double (overkill?).
+- Final: Use separate class with a double.
+
+** TODO [#B] Possible variable types
+Types of variables: value, category, boolean
+- category: derive from =function_base= or =function=?  The latter
+  seems more natural.
+
+** TODO [#B] Constants
+- variables with 0 range (min = max = val),
+- variables bound to values (=boost::bind=).
+
+** DONE [#A] Function pointer implementation
+Fixed signature: (number of args, arg array), (vector of args).
+
+** TODO [#A] Simplify function pointer interface
+Bind user provided function pointer to standard interface internally.
+Not clear how to handle the input of arbitrary function signature w/o
+templates.
+
+- Declaration w/ templates:
+  : function(fptr_t<t1,t2> fptr, fnbase_ptr_vec);
+- Declaration w/o templates (pseudo-code with Boost.MPL):
+  : function(fptr_t fptr, boost::mpl::list<t1,t2> types, fnbase_ptr_vec);
+  This probably will never work, since =fptr_t= has to have a known
+  signature at compile time.
+- Bind the user-function signature with the standard interface using
+  =std::bind= or =boost::bind=.
 
 ** TODO [#A] Hide use of shared pointers
 Do not take function parameters as pointers.  Make copies inside the
@@ -97,6 +118,7 @@ Test concepts:
   - Should be possible to update only modified branches of the tree.
   - Look at git tree objects for ideas.
 - Caveat: hash function should be faster than evaluation.
+- See Merkle tree, =std::hash= from =<functional>=.
 
 * TODO [#C] Fitter
 Use generic TFitter to build an interface to Minuit.
@@ -110,7 +132,7 @@ dependency information.  The dependency tree traversal should be both
 ways: dependants as well as dependencies.  Maybe limit to one hop, or
 ask for number of hops when instantiating the debugger.
 
-* TODO [#C] Bindings
+* TODO [#A] Bindings
 - Implement getter and setters such that they are easily translateable
   to python properties with Boost.Python.
 - Revisit inheritance hierarchy from the perspective of bindings.
