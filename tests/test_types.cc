@@ -15,14 +15,29 @@ typedef boost::mpl::list<variable,boolean,function> types;
 
 BOOST_AUTO_TEST_SUITE(test_types)
 
-BOOST_AUTO_TEST_CASE_TEMPLATE(default_constructor, T, types)
+BOOST_AUTO_TEST_CASE_TEMPLATE(default_constructible, T, types)
 {
   BOOST_CHECK(std::is_default_constructible<T>::value);
+}
+
+BOOST_AUTO_TEST_CASE_TEMPLATE(copy_constructible, T, types)
+{
+  BOOST_CHECK(std::is_copy_constructible<T>::value);
+}
+
+BOOST_AUTO_TEST_CASE_TEMPLATE(move_constructible, T, types)
+{
+  BOOST_CHECK(std::is_move_constructible<T>::value);
 }
 
 BOOST_AUTO_TEST_CASE_TEMPLATE(destructible, T, types)
 {
   BOOST_CHECK(std::is_destructible<T>::value);
+}
+
+BOOST_AUTO_TEST_CASE_TEMPLATE(has_virtual_destructor, T, types)
+{
+  BOOST_CHECK(std::has_virtual_destructor<T>::value);
 }
 
 BOOST_AUTO_TEST_CASE_TEMPLATE(assignable, T, types)
