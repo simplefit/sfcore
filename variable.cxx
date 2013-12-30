@@ -1,6 +1,8 @@
 #include <stdexcept>
 #include <string>
 
+#include <boost/format.hpp>
+
 #include "variable.hxx"
 
 
@@ -20,9 +22,31 @@ variable::variable(const double val)
 variable::variable(const variable & other)
   : _min(other._min), _max(other._max), _val(other._val) {}
 
+///////////////
+// Operators //
+///////////////
+
+auto variable::operator=(const variable & other) -> variable &
+{
+  if (this != &other) {
+    _min = other._min; _max = other._max; _val = other._val;
+  }
+  return *this;
+}
+
 /////////////
 // Methods //
 /////////////
+
+bool variable::check_bounds() const
+{
+ return check_bounds(_val);
+}
+
+bool variable::is_constant() const
+{
+  return (_min == _max and _min == _val);
+}
 
 void variable::set_val(const double val)
 {
@@ -37,12 +61,11 @@ void variable::set_val(const double val)
 
 bool variable::check_bounds(const double val) const
 {
+  boost::format msg("Value out of range, %s < %s\n");
   if (val < _min) {
-    throw std::out_of_range("Value out of range, " + std::to_string(val)
-			    + " < " + std::to_string(_min) + "\n");
+    throw std::out_of_range(boost::str(msg % val % _min));
   } else if (_max < val) {
-    throw std::out_of_range("Value out of range, " + std::to_string(_max)
-			    + " < " + std::to_string(val) + "\n");
+    throw std::out_of_range(boost::str(msg % _max % val));
   }
   return true;
 }

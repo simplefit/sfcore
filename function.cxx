@@ -64,9 +64,18 @@ function::~function() {}
 // Operators //
 ///////////////
 
+auto function::operator=(const function & other) -> function &
+{
+  if (this != &other) {
+    _fptr = other._fptr; _args = other._args;
+  }
+  return *this;
+}
+
 function::operator double () const
 {
   std::vector<double> args;
+  args.reserve(_args.size());
   for (auto arg_ptr : _args) {
     args.push_back(*arg_ptr);	// arg_ptr is fnbase_ptr
   }

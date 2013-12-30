@@ -26,11 +26,7 @@ public:
 
   virtual ~function();
 
-  inline function & operator=(const function & other) {
-    _fptr = other._fptr;
-    _args = other._args;
-    return *this;
-  }
+  function & operator=(const function & other);
 
   virtual operator double () const;
 

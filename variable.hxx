@@ -14,20 +14,13 @@ public:
 
   ~variable() {}
 
-  inline variable & operator=(const variable & other) {
-    _min = other._min;
-    _max = other._max;
-    _val = other._val;
-    return *this;
-  }
+  variable & operator=(const variable & other);
 
   inline virtual operator double () const { return _val; }
 
-  inline bool check_bounds() const { return check_bounds(_val); }
+  bool check_bounds() const;
 
-  inline bool is_constant() const {
-    return (_min == _max and _min == _val);
-  }
+  bool is_constant() const;
 
   void set_val(const double val);
 
