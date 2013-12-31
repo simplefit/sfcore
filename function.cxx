@@ -67,9 +67,24 @@ function::~function() {}
 auto function::operator=(const function & other) -> function &
 {
   if (this != &other) {
-    _fptr = other._fptr; _args = other._args;
+    _fptr = other._fptr;
+    _args = other._args;
   }
   return *this;
+}
+
+bool function::operator==(const function & other) const
+{
+  if (other._args == _args and
+      other._fptr == _fptr)
+    return true;
+  else
+    return false;
+}
+
+bool function::operator!=(const function & other) const
+{
+  return not (*this == other);
 }
 
 function::operator double () const

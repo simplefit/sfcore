@@ -26,7 +26,11 @@ public:
 
   virtual ~function();
 
-  function & operator=(const function & other);
+  virtual function & operator=(const function & other);
+
+  virtual bool operator==(const function & other) const;
+
+  virtual bool operator!=(const function & other) const;
 
   virtual operator double () const;
 

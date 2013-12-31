@@ -12,11 +12,11 @@ public:
 
   ~boolean() {}
 
-  inline boolean & operator=(const boolean & other) {
-    _val = other._val;
-    _is_constant = other._is_constant;
-    return *this;
-  }
+  virtual boolean & operator=(const boolean & other);
+
+  virtual bool operator==(const boolean & other) const;
+
+  virtual bool operator!=(const boolean & other) const;
 
   inline virtual operator double () const { return _val; }
 

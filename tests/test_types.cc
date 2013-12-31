@@ -48,4 +48,13 @@ BOOST_AUTO_TEST_CASE_TEMPLATE(assignable, T, types)
   BOOST_CHECK(std::is_move_assignable<T>::value);
 }
 
+BOOST_AUTO_TEST_CASE_TEMPLATE(comparison, T, types)
+{
+  T myinstance;
+  // since != implemented using ==, need to check only one
+  // FIXME: Why the following doesn't compile?
+  // BOOST_CHECK_EQUAL(myinstance, myinstance);
+  BOOST_CHECK(myinstance == myinstance);
+}
+
 BOOST_AUTO_TEST_SUITE_END()

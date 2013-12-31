@@ -14,7 +14,11 @@ public:
 
   ~variable() {}
 
-  variable & operator=(const variable & other);
+  virtual variable & operator=(const variable & other);
+
+  virtual bool operator==(const variable & other) const;
+
+  virtual bool operator!=(const variable & other) const;
 
   inline virtual operator double () const { return _val; }
 

@@ -29,9 +29,26 @@ variable::variable(const variable & other)
 auto variable::operator=(const variable & other) -> variable &
 {
   if (this != &other) {
-    _min = other._min; _max = other._max; _val = other._val;
+    _min = other._min;
+    _max = other._max;
+    _val = other._val;
   }
   return *this;
+}
+
+bool variable::operator==(const variable & other) const
+{
+  if (other._min == _min and
+      other._max == _max and
+      other._val == _val)
+    return true;
+  else
+    return false;
+}
+
+bool variable::operator!=(const variable & other) const
+{
+  return not (*this == other);
 }
 
 /////////////
