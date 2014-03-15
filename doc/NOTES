@@ -1,6 +1,7 @@
 # -*- mode: org; -*-
 
 #+LINK: wp https://en.wikipedia.org/wiki/%s
+#+LINK: cpp http://en.cppreference.com/w/cpp/%s
 
 * Goals
 1. Dependency graph
@@ -24,6 +25,25 @@
    - [[wp:Hash_table][Hash table]]: is it well defined for unbalanced trees?
    - [[wp:Hash_tree_(persistent_data_structure)][Hash tree]] ([[wp:Trie][trie]]/prefix tree): derivative of hash table.
    - [[wp:Binary_Search_Tree][Binary search tree]]: since /k/-d tree is already one.
+3. Might not need flattening, use [[wp:Merkle_tree][Merkle trees]]: each node is labelled
+   with the hash of its children.
+
+* Hashing
+1. Is there a need for custom [[cpp:utility/hash][=std::hash=]] specialisations?  Hash needs
+   to depend on:
+   - memory address (to detect replaced components)
+   - value (to detect changed values)
+   The standard library already provides =std::hash<std::shared_ptr>=
+   and =std::hash<double>=.
+2. Maybe write one for all the "variable" types using the above so
+   that the caching class can traverse the dependency tree and hash
+   each variable-type component.  All =functions= can then have a hash
+   that depends on its components.  Custom hash functions for:
+   - variable-types,
+   - combined hash for multiple variable-types.
+3. Finally put everything in a /Merkle tree/.  This is our final cache
+   state, say, =cache_state= (or present state of the dependency
+   tree).
 
 * Footnotes
 
