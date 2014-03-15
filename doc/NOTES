@@ -45,6 +45,27 @@
    state, say, =cache_state= (or present state of the dependency
    tree).
 
+* Caching
+1. Define a difference b/w two states of the same dependency tree
+   (cache objects).  So we can do:
+   : cache_state cache1(fn_obj);
+   : // change fn_obj
+   : cache_state cache2(fn_obj);
+   : dep_tree_coord = cache2 - cache1;
+2. <<dtc>>The difference is a list of dependency tree
+   coordinates/locations that needs updating (is a boolean
+   sufficient?).
+
+* Dependency tree traversal
+1. Using the dependency tree coordinate mechanism [[dtc][above]], provide a
+   utility that can find nodes/leaves in a dependency tree.  Useful
+   for customising.
+2. Provide utility to compare arbitrary dependency trees.
+   - How to match nodes?  Search for matching hashes through the tree?
+   - Do I need to define the size of a tree?
+3. How to identify identical branches in different parts of a tree?
+   - Once found, how to deal with them, say, when customising?
+
 * Footnotes
 
 [fn:1] [[http://xlinux.nist.gov/dads//][NIST's Dictionary of Algorithms and Data Structures]]
