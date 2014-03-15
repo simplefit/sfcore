@@ -1,0 +1,30 @@
+# -*- mode: org; -*-
+
+#+LINK: wp https://en.wikipedia.org/wiki/%s
+
+* Goals
+1. Dependency graph
+   - Representation (needed or is data-structure enough?)
+   - Graph traversal
+     - Implement naïve traversal initially.
+     - Flatten the structure for easy lookup (important for caching).
+       Flatten tree such that each level end up as sequential rows.
+2. Book-keeping (2 types):
+   - Evaluation.
+   - Operations, e.g. integrals (integration set, normalisation set).
+3. Caching
+   - Depends on book-keeping for operations.
+   - Flatten the tree for easy lookup for caching.
+
+* Data structures[fn:1]
+1. Dependency trees
+   - /k/-dimensional tree ([[wp:K-d_tree][/k/-d tree]])
+   - [[wp:B-tree][B-tree]]
+2. Flattening (for easy traversal)
+   - [[wp:Hash_table][Hash table]]: is it well defined for unbalanced trees?
+   - [[wp:Hash_tree_(persistent_data_structure)][Hash tree]] ([[wp:Trie][trie]]/prefix tree): derivative of hash table.
+   - [[wp:Binary_Search_Tree][Binary search tree]]: since /k/-d tree is already one.
+
+* Footnotes
+
+[fn:1] [[http://xlinux.nist.gov/dads//][NIST's Dictionary of Algorithms and Data Structures]]
