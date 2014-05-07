@@ -75,11 +75,7 @@ auto function::operator=(const function & other) -> function &
 
 bool function::operator==(const function & other) const
 {
-  if (other._args == _args and
-      other._fptr == _fptr)
-    return true;
-  else
-    return false;
+  return (other._args == _args and other._fptr == _fptr);
 }
 
 bool function::operator!=(const function & other) const
