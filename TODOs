@@ -23,12 +23,16 @@ underlying datastructures:
 - inherit from function: linear function with a double (overkill?).
 - Final: Use separate class with a double.
 
-** TODO [#B] Category variables
-Types of variables: value, category, boolean
+** TODO [#B] Specialised variables
+Types of variables: continuous, discrete, boolean, category
 - value: implemented by =variable=.
 - boolean: implemented by =boolean=.
-- category: derive from =function_base= or =function=?  The latter
-  seems more natural (discrete function, enum in computing parlance).
+- discrete: derive from =function_base=, =variable=, or =function=?
+  To be consistent with the variable implementation, probably should
+  derive from it and special case discretisation (enum in computing
+  parlance).
+- category: this is more like a variable that partitions a dataset
+  into subsets.
 
 ** TODO [#B] Constants
 - variables with 0 range (min = max = val),
