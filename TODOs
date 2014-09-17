@@ -78,7 +78,7 @@ dependency tree comparison.
 
 Which of the following make more sense:
 - scan range, or
-- evaluate at point.
+- evaluate at point?
 
 * TODO [#B] Integrals [0/2]
 ** TODO Analytical integration
