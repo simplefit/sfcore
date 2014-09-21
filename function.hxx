@@ -26,7 +26,7 @@ public:
 
   function();
 
-  function(fptr_t fptr, std::vector<double> args);
+  function(fptr_t fptr, std::vector<double> & args);
 
   function(fptr_t fptr, unsigned num, double * args);
 

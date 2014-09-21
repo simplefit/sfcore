@@ -15,7 +15,7 @@ function::function() : _args(1)
   _fptr = [](std::vector<double> & args) { return args.front(); };
 }
 
-function::function(fptr_t fptr, std::vector<double> args)
+function::function(fptr_t fptr, std::vector<double> & args)
   : _fptr(fptr), _args(args.size(), nullptr)
 {
   unsigned size(args.size());
