@@ -5,6 +5,7 @@
 #include "function.hxx"
 
 
+// Convert pod vectors to vectors of variables
 template <typename T>
 fnbase_ptr_vec pod_to_variable(std::vector<T> args)
 {
@@ -16,6 +17,7 @@ fnbase_ptr_vec pod_to_variable(std::vector<T> args)
   return vars;
 }
 
+// Convert pod arrays to vectors of variables
 template <typename T>
 fnbase_ptr_vec pod_to_variable(unsigned num, T * args)
 {

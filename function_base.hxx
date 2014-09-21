@@ -9,6 +9,8 @@ class function_base {
 public:
   // function_base() {}
   virtual ~function_base() {}
+
+  // Automatic type conversion to double
   virtual operator double () const = 0;
 };
 
