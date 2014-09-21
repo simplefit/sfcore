@@ -1,0 +1,71 @@
+# -*- mode: org; -*-
+
+#+LINK: wp https://en.wikipedia.org/wiki/%s
+#+LINK: cpp http://en.cppreference.com/w/cpp/%s
+
+* Goals
+1. Dependency graph
+   - Representation (needed or is data-structure enough?)
+   - Graph traversal
+     - Implement naïve traversal initially.
+     - Flatten the structure for easy lookup (important for caching).
+       Flatten tree such that each level end up as sequential rows.
+2. Book-keeping (2 types):
+   - Evaluation.
+   - Operations, e.g. integrals (integration set, normalisation set).
+3. Caching
+   - Depends on book-keeping for operations.
+   - Flatten the tree for easy lookup for caching.
+
+* Data structures[fn:1]
+1. Dependency trees
+   - /k/-dimensional tree ([[wp:K-d_tree][/k/-d tree]])
+   - [[wp:B-tree][B-tree]]
+2. Flattening (for easy traversal)
+   - [[wp:Hash_table][Hash table]]: is it well defined for unbalanced trees?
+   - [[wp:Hash_tree_(persistent_data_structure)][Hash tree]] ([[wp:Trie][trie]]/prefix tree): derivative of hash table.
+   - [[wp:Binary_Search_Tree][Binary search tree]]: since /k/-d tree is already one.
+3. Might not need flattening, use [[wp:Merkle_tree][Merkle trees]]: each node is labelled
+   with the hash of its children.
+
+* Hashing
+1. Is there a need for custom [[cpp:utility/hash][=std::hash=]] specialisations?  Hash needs
+   to depend on:
+   - memory address (to detect replaced components)
+   - value (to detect changed values)
+   The standard library already provides =std::hash<std::shared_ptr>=
+   and =std::hash<double>=.
+2. Maybe write one for all the "variable" types using the above so
+   that the caching class can traverse the dependency tree and hash
+   each variable-type component.  All =functions= can then have a hash
+   that depends on its components.  Custom hash functions for:
+   - variable-types,
+   - combined hash for multiple variable-types.
+3. Finally put everything in a /Merkle tree/.  This is our final cache
+   state, say, =cache_state= (or present state of the dependency
+   tree).
+
+* Caching
+1. Define a difference b/w two states of the same dependency tree
+   (cache objects).  So we can do:
+   : cache_state cache1(fn_obj);
+   : // change fn_obj
+   : cache_state cache2(fn_obj);
+   : dep_tree_coord = cache2 - cache1;
+2. <<dtc>>The difference is a list of dependency tree
+   coordinates/locations that needs updating (is a boolean
+   sufficient?).
+
+* Dependency tree traversal
+1. Using the dependency tree coordinate mechanism [[dtc][above]], provide a
+   utility that can find nodes/leaves in a dependency tree.  Useful
+   for customising.
+2. Provide utility to compare arbitrary dependency trees.
+   - How to match nodes?  Search for matching hashes through the tree?
+   - Do I need to define the size of a tree?
+3. How to identify identical branches in different parts of a tree?
+   - Once found, how to deal with them, say, when customising?
+
+* Footnotes
+
+[fn:1] [[http://xlinux.nist.gov/dads//][NIST's Dictionary of Algorithms and Data Structures]]
