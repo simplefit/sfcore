@@ -75,7 +75,9 @@ auto function::operator=(const function & other) -> function &
 
 bool function::operator==(const function & other) const
 {
-  return (other._args == _args and other._fptr == _fptr);
+  return (other._args == _args and
+	  other._fptr.target<__fptr_sig__>() == _fptr.target<__fptr_sig__>());
+  // Comparison of functor objects is hard, see header file
 }
 
 bool function::operator!=(const function & other) const

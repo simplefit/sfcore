@@ -1,12 +1,28 @@
 #ifndef __simplefit_function__
 #define __simplefit_function__
 
+#include <functional>
+
 #include "function_base.hxx"
 
+#define __fptr_sig__ double (std::vector<double> &)
 
 class function : public function_base {
 public:
-  typedef double (* fptr_t) (std::vector<double> &);
+  typedef std::function<__fptr_sig__> fptr_t;
+  // NOTE: Switching to using function objects (either std, or
+  // Boost.Function) in comparison to bare function pointers comes
+  // with a price; using a generic wrapper means there is no reliable
+  // way for the wrapper class to implement a comparison operator.
+  //
+  // See the two following write-ups for more:
+  // - http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2004/n1667.pdf
+  // - http://www.boost.org/doc/libs/1_56_0/doc/html/function/faq.html#idp214837184
+  //
+  // For our purposes, comparing the bare pointers is sufficient.  So
+  // we use std::function::target<..>(), see function::operator==(..).
+  //
+  // Using this allows for easier communication with Python.
 
   function();
 
