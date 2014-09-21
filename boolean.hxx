@@ -7,7 +7,7 @@
 class boolean : public function_base {
 public:
   // Default constructor
-  boolean(const bool val=true, const bool constant=true);
+  boolean(const bool val=true, const bool constant=false);
 
   // Copy constructor
   boolean(const boolean & other);
