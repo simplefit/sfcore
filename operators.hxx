@@ -9,13 +9,21 @@
 
 function & operator-(fnbase & rhs);
 
-function & operator+(fnbase & lhs, fnbase & rhs);
+function & operator+=(fnbase & lhs, /* const */ fnbase & rhs);
 
-function & operator-(fnbase & lhs, fnbase & rhs);
+function & operator+(fnbase & lhs, /* const */ fnbase & rhs);
 
-function & operator*(fnbase & lhs, fnbase & rhs);
+function & operator-=(fnbase & lhs, /* const */ fnbase & rhs);
 
-function & operator/(fnbase & lhs, fnbase & rhs);
+function & operator-(fnbase & lhs, /* const */ fnbase & rhs);
+
+function & operator*=(fnbase & lhs, /* const */ fnbase & rhs);
+
+function & operator*(fnbase & lhs, /* const */ fnbase & rhs);
+
+function & operator/=(fnbase & lhs, /* const */ fnbase & rhs);
+
+function & operator/(fnbase & lhs, /* const */ fnbase & rhs);
 
 // function & operator^(fnbase & lhs, fnbase & rhs);
 
