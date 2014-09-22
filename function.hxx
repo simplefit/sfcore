@@ -74,7 +74,7 @@ public:
   const fnbase_ptr & operator[](std::size_t idx) const;
 
   // Replace the requested function component
-  void replace(const unsigned idx, fnbase * arg);
+  void replace(std::size_t idx, fnbase * arg);
 
   // Access to underlying function components
   fnbase_ptr_vec& components();

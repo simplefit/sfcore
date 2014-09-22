@@ -109,7 +109,7 @@ const fnbase_ptr & function::operator[](std::size_t idx) const
 // Methods //
 /////////////
 
-void function::replace(const unsigned idx, fnbase * arg)
+void function::replace(std::size_t idx, fnbase * arg)
 {
   if (idx >= _args.size())
     throw std::out_of_range("Index out of range: "
