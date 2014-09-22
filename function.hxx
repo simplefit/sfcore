@@ -24,6 +24,7 @@ public:
   //
   // Using this allows for easier communication with Python.
 
+  /* Simple functions: only variables as components */
   // Default constructor
   function();
 
@@ -33,6 +34,7 @@ public:
   // Construct from an array of doubles
   function(fptr_t fptr, unsigned num, double * args);
 
+  /* Complex functions: variables and other functions as components */
   // Construct from a vector of shared_ptr of variables or functions
   function(fptr_t fptr, fnbase_ptr_vec & args);
 
@@ -64,6 +66,12 @@ public:
 
   // Automatic type conversion to double
   virtual operator double () const;
+
+  // Array subscript operator, for lvalues
+  fnbase_ptr & operator[](std::size_t idx);
+
+  // Array subscript operator, for rvalues
+  const fnbase_ptr & operator[](std::size_t idx) const;
 
   // Replace the requested function component
   void replace(const unsigned idx, fnbase * arg);

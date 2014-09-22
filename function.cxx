@@ -95,6 +95,16 @@ function::operator double () const
   return _fptr(args);
 }
 
+fnbase_ptr & function::operator[](std::size_t idx)
+{
+  return _args[idx];
+}
+
+const fnbase_ptr & function::operator[](std::size_t idx) const
+{
+  return const_cast<fnbase_ptr&>((*this)[idx]);
+}
+
 /////////////
 // Methods //
 /////////////

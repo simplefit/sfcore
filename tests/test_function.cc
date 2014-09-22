@@ -29,6 +29,14 @@ BOOST_FIXTURE_TEST_CASE(automatic_conversion, fnsetup)
   BOOST_CHECK_EQUAL(6.0, *myfunc); // 1+2+3
 }
 
+BOOST_FIXTURE_TEST_CASE(array_access, fnsetup)
+{
+  BOOST_CHECK_EQUAL(2.0, *(*myfunc)[1]); // fn[1] == 2
+  (*myfunc)[1] = std::make_shared<variable>(5);
+  BOOST_CHECK_EQUAL(5.0, *(*myfunc)[1]); // fn[1] == 5
+  BOOST_CHECK_EQUAL(9.0, *myfunc); // 1+5+3
+}
+
 BOOST_FIXTURE_TEST_CASE(direct_access, fnsetup)
 {
   auto& vars = myfunc->components();
