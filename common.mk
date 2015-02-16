@@ -2,9 +2,10 @@
 CC           	:= $(shell which gcc)
 CXX 		:= $(shell which g++)
 
-CSTD		:= -std=c++11
-OPTS    	:= -g -Wall -fPIC -m64 $(CSTD)
-CFLAGS  	:= -c $(OPTS) -pthread
+CXXSTD		:= -std=c++11
+OPTS		:= -g -Wall -m64 $(CXXSTD)
+
+CXXFLAGS  	:= $(OPTS) -pthread -fPIC
 LDFLAGS 	:= $(OPTS) -shared
 
 # colours

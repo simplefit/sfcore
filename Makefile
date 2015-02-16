@@ -9,7 +9,7 @@ TEST_DEPS	:= $(patsubst %.cc,.deps/%.d,$(TESTS))
 
 .PHONY:	all tests clean distclean $(patsubst tests/%.cc,%,$(TESTS))
 
-all:	libsfcore.so
+all:	libsfcore.so tests
 
 libsfcore.so:	$(patsubst %.cxx,%.o,$(SRCS))
 	$(CXX) $(LDFLAGS) -o $@ $^
@@ -25,7 +25,7 @@ tests:	$(patsubst %.cc,%,$(TESTS))
 	mkdir -p $@
 
 $(DEPS):.deps/%.d:	%.cxx | .deps
-	$(CXX) $(CSTD) -MM $< -MF $@
+	$(CXX) $(CXXSTD) -MM $< -MF $@
 
 # do not include when cleaning
 ifeq ($(findstring clean,$(MAKECMDGOALS)),)
@@ -33,10 +33,10 @@ ifeq ($(findstring clean,$(MAKECMDGOALS)),)
 endif
 
 $(patsubst %.cxx,%.o,$(SRCS)):%.o:	%.cxx
-	$(CXX) $(CFLAGS) -o $@ $<
+	$(CXX) -c $(CXXFLAGS) -o $@ $<
 
 $(TEST_DEPS):.deps/%.d:	%.cc | .deps/tests
-	$(CXX) $(CSTD) -I. -MM $< -MF $@
+	$(CXX) $(CXXSTD) -I. -MM $< -MF $@
 
 # not empty when target matches test* (condition is true)
 ifneq ($(filter test%,$(MAKECMDGOALS)),)
@@ -44,7 +44,7 @@ ifneq ($(filter test%,$(MAKECMDGOALS)),)
 endif
 
 $(patsubst %.cc,%,$(TESTS)):%:	%.cc libsfcore.so
-	$(CXX) -pthread $(OPTS) -I. -L. -lsfcore -o $@ $<
+	$(CXX) $(CXXFLAGS) -I. -L. -lsfcore -o $@ $<
 
 $(patsubst tests/%.cc,%,$(TESTS)):%:	tests/%
 	@$(TEST_RUN_HEADER) $<
