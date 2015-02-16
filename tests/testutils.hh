@@ -4,8 +4,8 @@
 double sum(std::vector<double> & args)
 {
   double res(0.);
-  for (unsigned i = 0; i < args.size(); ++i) {
-    res += double(args[i]);
+  for (auto el : args) {
+    res += el;
   }
   return res;
 }
